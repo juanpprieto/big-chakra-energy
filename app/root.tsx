@@ -26,6 +26,7 @@ import {DEFAULT_LOCALE, parseMenu, type EnhancedMenu} from './lib/utils';
 import invariant from 'tiny-invariant';
 import {Shop, Cart} from '@shopify/hydrogen/storefront-api-types';
 import {useAnalytics} from './hooks/useAnalytics';
+import {ChakraProvider} from '@chakra-ui/react';
 
 export const links: LinksFunction = () => {
   return [
@@ -84,12 +85,14 @@ export default function App() {
         <Links />
       </head>
       <body>
-        <Layout
-          layout={data.layout as LayoutData}
-          key={`${locale.language}-${locale.country}`}
-        >
-          <Outlet />
-        </Layout>
+        <ChakraProvider>
+          <Layout
+            layout={data.layout as LayoutData}
+            key={`${locale.language}-${locale.country}`}
+          >
+            <Outlet />
+          </Layout>
+        </ChakraProvider>
         <ScrollRestoration />
         <Scripts />
       </body>
